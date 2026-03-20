@@ -1,3 +1,5 @@
+from typing import Dict
+
 from types import MappingProxyType
 import math
 
@@ -72,19 +74,19 @@ class Angle(object):
                })
 
 
-    def __init__(self, value = 0, unit = units["degreeminutesecond"]):
+    def __init__(self, value:float = 0, unit:Dict = units["degreeminutesecond"]):
 
         self.seconds = unit["toseconds"](value)
         self.unit = unit
 
 
     @property
-    def value(self):
+    def value(self) -> float:
         return self.unit["fromseconds"](self.seconds)
 
 
     @value.setter
-    def value(self, value):
+    def value(self, value:float) -> None:
 
         self.seconds = self.unit["toseconds"](value)
 
@@ -96,7 +98,7 @@ class Angle(object):
         return f"{self.unit['tostring'](value)}"
 
 
-    def approx_equal(self, other):
+    def approx_equal(self, other) -> bool:
 
         return math.isclose(self.seconds, other.seconds)
 
@@ -147,32 +149,32 @@ class Angle(object):
     # comparison methods
 
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
 
         return self.seconds < other.seconds
 
 
-    def __le__(self, other):
+    def __le__(self, other) -> bool:
 
         return self.seconds <= other.seconds
 
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
 
         return self.seconds == other.seconds
 
 
-    def __gt__(self, other):
+    def __gt__(self, other) -> bool:
 
         return self.seconds > other.seconds
 
 
-    def __ge__(self, other):
+    def __ge__(self, other) -> bool:
 
         return self.seconds >= other.seconds
 
 
-    def __ne__(self, other):
+    def __ne__(self, other) -> bool:
 
         return self.seconds != other.seconds
 
